@@ -1,1 +1,0 @@
-# 2020-11-wns-paris-tamplo-projet
