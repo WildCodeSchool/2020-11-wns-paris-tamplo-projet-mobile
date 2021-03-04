@@ -1,9 +1,7 @@
 import React from "react";
-import { Button, View, Text } from "react-native";
+import { TouchableOpacity, View, Text, StyleSheet } from "react-native";
 
 const ListQuizzes = ({ data, error, loading, navigation }) => {
-  console.log(navigation);
-
   if (loading) return <Text>Chargement des quizzes ...</Text>;
   if (error) return <Text>Error error error</Text>;
 
@@ -11,17 +9,43 @@ const ListQuizzes = ({ data, error, loading, navigation }) => {
     navigation.navigate("Questions", { quiz: quiz });
   };
   return (
-    <View>
+    <View style={styles.quizContainer}>
       {data.map((quiz) => {
         return (
-          <Button
-            title={quiz.title}
-            key={quiz.id}
-            onPress={() => getQuiz(quiz)}
-          />
+          <View style={styles.quizElement}>
+            <TouchableOpacity
+              style={styles.quizButton}
+              key={quiz.id}
+              onPress={() => getQuiz(quiz)}
+            >
+              <Text style={styles.quizTextButton}>{quiz.title}</Text>
+            </TouchableOpacity>
+          </View>
         );
       })}
     </View>
   );
 };
 export default ListQuizzes;
+
+const styles = StyleSheet.create({
+  quizContainer: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  quizElement: {
+    width: "90%",
+    paddingTop: 10,
+  },
+  quizButton: {
+    padding: 10,
+    borderRadius: 4,
+    alignItems: "center",
+    backgroundColor: "#00B5CE",
+  },
+  quizTextButton: {
+    color: "white",
+    fontSize: 18,
+  },
+});

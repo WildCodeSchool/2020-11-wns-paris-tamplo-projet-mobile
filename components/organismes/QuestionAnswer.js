@@ -1,49 +1,79 @@
 import React, { useState } from "react";
-import { Button, ScrollView, Text, View } from "react-native";
+import { ScrollView, Text, View, StyleSheet } from "react-native";
 import CheckBox from "@react-native-community/checkbox";
-import Container from "../templates/Container";
 
-const QuestionAnswer = ({ question }) => {
-  const [answer, setAnswer] = useState([]);
+const QuestionAnswer = ({ question, showAnswer }) => {
+  const [answerIds, setAnswerids] = useState([]);
 
   const handleChange = (responseId) => {
-    console.log("click");
-    const index = answer.findIndex((id) => id === responseId);
+    const index = answerIds.findIndex((id) => id === responseId);
     if (index >= 0) {
-      answer.splice(index, 1);
-      setAnswer(answer);
+      const answerTmp = answerIds.slice();
+      answerTmp.splice(index, 1);
+      setAnswerids(answerTmp);
     } else {
-      setAnswer((prevValue) => [...prevValue, responseId]);
+      setAnswerids((oldValue) => [...oldValue, responseId]);
+    }
+  };
+
+  const getValidation = (isCorrect, isSelected) => {
+    if (showAnswer && isCorrect && isSelected) {
+      return { backgroundColor: "#98FB98" };
+    } else if (showAnswer && !isCorrect && isSelected) {
+      return { backgroundColor: "pink" };
+    } else if (showAnswer && isCorrect && !isSelected) {
+      return { backgroundColor: "#8EDAFF" };
     }
   };
 
   return (
-    <Container>
-      <ScrollView>
-        <Text> {question.question} </Text>
+    <ScrollView>
+      <Text style={styles.questionContainer}>{question.question}</Text>
+      <View style={styles.responsesContainer}>
         {question &&
-          question.responses.map((el, index) => {
-            const isSelected = answer.includes(el.id) ? "YES" : "NO";
-            console.log(isSelected);
+          question.responses.map((response) => {
+            const isSelected = answerIds.includes(response.id);
             return (
-              <View key={el.id}>
-                <Text>{el.response}</Text>
-                {/* <CheckBox
-                  disabled={false}
-                  value={answer.includes(el.id)}
-                  onChange={() => handleChange(el.id)}
-                  onValueChange={(newValue) => console.log(newValue)}
-                /> */}
-                <Button
-                  onPress={() => handleChange(el.id)}
-                  title={isSelected}
+              <View
+                key={response.id}
+                style={[
+                  styles.responseElement,
+                  getValidation(response.isCorrect, isSelected),
+                ]}
+              >
+                <Text>{response.response}</Text>
+                <CheckBox
+                  disabled={showAnswer}
+                  value={isSelected}
+                  onValueChange={() => handleChange(response.id)}
                 />
               </View>
             );
           })}
-      </ScrollView>
-    </Container>
+      </View>
+    </ScrollView>
   );
 };
 
 export default QuestionAnswer;
+
+const styles = StyleSheet.create({
+  questionContainer: {
+    marginTop: 20,
+    fontSize: 18,
+    borderBottomWidth: 2,
+    borderBottomColor: "#00B5CE",
+    paddingBottom: 5,
+  },
+  responsesContainer: {
+    marginTop: 5,
+    flexDirection: "row",
+    justifyContent: "space-around",
+    flexWrap: "wrap",
+  },
+  responseElement: {
+    width: "32%",
+    flexDirection: "column",
+    alignItems: "center",
+  },
+});
