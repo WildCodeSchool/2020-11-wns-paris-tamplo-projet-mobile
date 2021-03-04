@@ -1,7 +1,7 @@
 import React from "react";
 import { ScrollView, Text } from "react-native";
 import Container from "../templates/Container";
-import QuestionAnswer from "../molecules/QuestionAnswer";
+import QuestionAnswer from "../organismes/QuestionAnswer";
 
 const Questions = (props) => {
   const quiz = props.route.params.quiz;
@@ -16,7 +16,7 @@ const Questions = (props) => {
             : "Pas d'indication particulière pour ce test, bonne chance !"}
         </Text>
         {quiz.questions.map((el, i) => {
-          return <QuestionAnswer key={i} questions={el} />;
+          return <QuestionAnswer key={i} question={el} />;
         })}
       </ScrollView>
     </Container>
