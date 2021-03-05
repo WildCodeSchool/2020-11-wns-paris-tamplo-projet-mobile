@@ -25,7 +25,7 @@ const Home = () => {
           </Text>
           <View style={styles.containerTextHome}>
             <Text style={styles.commentHome}>
-              Ici, tu vas retrouver quel quiz tu as fait, tes notes et quand il
+              Ici, tu vas retrouver quel quiz tu as fait, tes notes et quand ils
               sont à rendre. Pour répondre aux autres quizzes, tu as l'onglet en
               bas à droite qui te mène à la liste des quizzes auxquels tu as
               accès.

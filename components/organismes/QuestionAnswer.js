@@ -18,11 +18,11 @@ const QuestionAnswer = ({ question, showAnswer }) => {
 
   const getValidation = (isCorrect, isSelected) => {
     if (showAnswer && isCorrect && isSelected) {
-      return { backgroundColor: "#98FB98" };
+      return { backgroundColor: "#b5ddd0" };
     } else if (showAnswer && !isCorrect && isSelected) {
-      return { backgroundColor: "pink" };
+      return { backgroundColor: "#ddbfb5" };
     } else if (showAnswer && isCorrect && !isSelected) {
-      return { backgroundColor: "#8EDAFF" };
+      return { backgroundColor: "#b5cadd" };
     }
   };
 
