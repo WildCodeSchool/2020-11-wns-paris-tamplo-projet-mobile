@@ -31,10 +31,10 @@ const Questions = (props) => {
           })}
         </View>
         <TouchableOpacity
-          style={styles.quizButton}
+          style={styles.questionButton}
           onPress={() => setShowAnswer((oldValue) => !oldValue)}
         >
-          <Text style={styles.quizTextButton}>Envoyer mes réponses !</Text>
+          <Text style={styles.questionTextButton}>Envoyer mes réponses !</Text>
         </TouchableOpacity>
       </ScrollView>
     </Container>
@@ -47,6 +47,7 @@ const styles = StyleSheet.create({
   questionContainer: {
     flex: 1,
     marginHorizontal: 10,
+    paddingTop: 30,
   },
   title: {
     backgroundColor: "#00B5CE",
@@ -61,13 +62,14 @@ const styles = StyleSheet.create({
     fontSize: 16,
     textAlign: "center",
   },
-  quizButton: {
+  questionButton: {
     padding: 10,
-    borderRadius: 4,
+    borderRadius: 25,
+    margin: 50,
     alignItems: "center",
     backgroundColor: "#00B5CE",
   },
-  quizTextButton: {
+  questionTextButton: {
     color: "white",
     fontSize: 18,
   },

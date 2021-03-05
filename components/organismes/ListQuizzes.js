@@ -12,10 +12,9 @@ const ListQuizzes = ({ data, error, loading, navigation }) => {
     <View style={styles.quizContainer}>
       {data.map((quiz) => {
         return (
-          <View style={styles.quizElement}>
+          <View key={quiz.id} style={styles.quizElement}>
             <TouchableOpacity
               style={styles.quizButton}
-              key={quiz.id}
               onPress={() => getQuiz(quiz)}
             >
               <Text style={styles.quizTextButton}>{quiz.title}</Text>
@@ -33,6 +32,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
+    paddingTop: 30,
   },
   quizElement: {
     width: "90%",
